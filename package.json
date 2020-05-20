@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.5",
     "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.6",
     "@types/jest": "^25.2.3",
     "@types/mongodb": "^3.5.18",
     "@types/node": "^14.0.1",
@@ -32,11 +34,13 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.4",
+    "sucrase": "^3.15.0",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.2"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
     "mongodb": "^3.5.7",
     "validator": "^13.0.0"
   }
