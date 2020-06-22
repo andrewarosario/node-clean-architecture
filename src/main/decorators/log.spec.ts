@@ -27,13 +27,35 @@ const makeSut = (): SutTypes => {
 }
 
 describe('LogController Decorator', () => {
-  test('SHould call controller handle', async () => {
+  test('Should call controller handle', async () => {
     const { sut, controllerStub } = makeSut()
     const httpRequest = {
-      body: { name: 'Andrew' }
+      body: {
+        name: 'Andrew',
+        email: 'any_mail@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
     }
     const handleSpy = jest.spyOn(controllerStub, 'handle')
     await sut.handle(httpRequest)
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
+  })
+
+  test('Should return the same result of the controller', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'Andrew',
+        email: 'any_mail@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: { name: 'Andrew' }
+    })
   })
 })
