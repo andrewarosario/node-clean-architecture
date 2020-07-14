@@ -49,10 +49,10 @@ describe('DbAddAccount Usecase', () => {
   test('Should call Hasher with correct password', async () => {
     const { sut, hasherStub } = makeSut()
 
-    const encryptSpy = jest.spyOn(hasherStub, 'hash')
+    const hashSpy = jest.spyOn(hasherStub, 'hash')
 
     await sut.add(makeFakeAccountData())
-    expect(encryptSpy).toHaveBeenCalledWith('valid_password')
+    expect(hashSpy).toHaveBeenCalledWith('valid_password')
   })
 
   test('Should throw if Hasher throws', async () => {
