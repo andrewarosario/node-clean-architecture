@@ -1,7 +1,7 @@
 import { LoginController } from './login-controller'
 import { badRequest, serverError, unauthorized, ok } from '../../helpers/http/http-helper'
 import { MissingParamError } from '../../errors'
-import { HttpRequest, Authentication, Validation } from './login-controller-protocols'
+import { HttpRequest, Authentication, Validation, LoginModel } from './login-controller-protocols'
 import { AuthenticationModel } from '../../../domain/usecase/authentication'
 
 interface SutTypes {
@@ -10,7 +10,7 @@ interface SutTypes {
   validationStub: Validation
 }
 
-const makeFakeRequest = (): HttpRequest => ({
+const makeFakeRequest = (): HttpRequest<LoginModel> => ({
   body: {
     email: 'any_email@mail.com',
     password: 'any_password'
