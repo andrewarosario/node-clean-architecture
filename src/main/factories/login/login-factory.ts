@@ -8,8 +8,9 @@ import { AccountMongoRepository } from '../../../infra/db/mongodb/account/accoun
 import { LogMongoRepository } from '../../../infra/db/mongodb/log-repository/log'
 import { DbAuthentication } from '../../../data/usecases/authentication/db-authentication'
 import { JwtAdapter } from '../../../infra/criptography/jwt-adapter/jwt-adapter'
+import { LoginModel } from '../../../presentation/controllers/login/models/login-model'
 
-export const makeLoginController = (): Controller => {
+export const makeLoginController = (): Controller<LoginModel> => {
   const salt = 12
   const bcryptAdapter = new BcryptAdapter(salt)
   const accountMongoRepository = new AccountMongoRepository()

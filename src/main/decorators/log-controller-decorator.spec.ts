@@ -6,11 +6,11 @@ import { AccountModel } from '../../domain/models/account'
 
 interface SutTypes {
   sut: LogControllerDecorator
-  controllerStub: Controller
+  controllerStub: Controller<any>
   logErrorRepositoryStub: LogErrorRepository
 }
 
-const makeFakeRequest = (): HttpRequest => ({
+const makeFakeRequest = (): HttpRequest<any> => ({
   body: {
     name: 'any_name',
     email: 'any_email@mail.com',
@@ -32,9 +32,9 @@ const makeFakeServerError = (): HttpResponse => {
   return serverError(fakeError)
 }
 
-const makeController = (): Controller => {
-  class ControllerStub implements Controller {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+const makeController = (): Controller<any> => {
+  class ControllerStub implements Controller<any> {
+    async handle (httpRequest: HttpRequest<any>): Promise<HttpResponse> {
       return Promise.resolve(ok(makeFakeAccount()))
     }
   }
