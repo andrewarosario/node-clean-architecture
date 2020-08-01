@@ -1,4 +1,6 @@
 node_modules
-gist
+dist
 coverage
-data
+./data
+requirements
+.vscode

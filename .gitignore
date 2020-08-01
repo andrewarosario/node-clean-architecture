@@ -1,5 +1,6 @@
 node_modules
-gist
-coverage
 dist
+coverage
 data
+!src/data
+.vscode
