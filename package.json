@@ -1,6 +1,6 @@
 {
   "name": "node-clean-architecture-typescript",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "NodeJs Rest API using TDD, Clean Architecture and Typescript",
   "main": "index.js",
   "scripts": {
