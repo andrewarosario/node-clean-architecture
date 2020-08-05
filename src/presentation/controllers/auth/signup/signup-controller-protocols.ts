@@ -1,0 +1,5 @@
+export * from '../../../protocols'
+export * from '../../../../domain/usecase/add-account'
+export * from '../../../../domain/models/account'
+export * from './models/signup-model'
+export * from '../../../../domain/usecase/authentication'
