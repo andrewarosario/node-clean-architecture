@@ -3,7 +3,7 @@ interface SurveyAnswer {
   answer: string
 }
 
-export interface AddSurveyModel {
+export interface AddSurveyControllerModel {
   question: string
   answers: SurveyAnswer[]
 }
