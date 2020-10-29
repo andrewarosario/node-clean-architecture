@@ -1,5 +1,5 @@
 import { SurveyModel } from '../../../domain/models/survey'
-import { LoadSurveysRepository } from '../../protocols/db/survey/load-surveys-repository copy'
+import { LoadSurveysRepository } from '../../protocols/db/survey/load-surveys-repository'
 import { DbLoadSurveys } from './db-load-surveys'
 
 interface SutTypes {
