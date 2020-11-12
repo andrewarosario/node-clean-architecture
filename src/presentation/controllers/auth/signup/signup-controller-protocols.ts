@@ -1,5 +1,5 @@
 export * from './models/signup-model'
 export * from '@/presentation/protocols'
-export * from '@/domain/usecase/add-account'
+export * from '@/domain/usecase/account/add-account'
 export * from '@/domain/models/account'
-export * from '@/domain/usecase/authentication'
+export * from '@/domain/usecase/account/authentication'
