@@ -1,3 +1,3 @@
-export interface SaveSurveyResultModel {
+export interface SaveSurveyResultControllerModel {
   answer: string
 }
