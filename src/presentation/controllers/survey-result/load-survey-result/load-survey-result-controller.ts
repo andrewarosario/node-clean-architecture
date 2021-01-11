@@ -1,7 +1,6 @@
-import { } from '@/domain/usecase/survey-result/load-survey-result'
-import { InvalidParamError } from '@/presentation/errors'
-import { forbidden, serverError } from '@/presentation/helpers/http/http-helper'
 import { LoadSurveyById, LoadSurveyResult, LoadSurveyResultControllerModel, HttpRequest, HttpResponse, Controller } from './load-survey-result-protocols'
+import { InvalidParamError } from '@/presentation/errors'
+import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
 
 export class LoadSurveyResultController implements Controller<LoadSurveyResultControllerModel> {
   constructor (
@@ -16,8 +15,8 @@ export class LoadSurveyResultController implements Controller<LoadSurveyResultCo
       if (!survey) {
         return forbidden(new InvalidParamError('surveyId'))
       }
-      await this.loadSurveyResult.load(surveyId)
-      return null
+      const surveyResult = await this.loadSurveyResult.load(surveyId)
+      return ok(surveyResult)
     } catch (error) {
       return serverError(error)
     }
