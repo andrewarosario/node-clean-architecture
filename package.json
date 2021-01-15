@@ -25,7 +25,7 @@
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.2.3",
     "@types/bcrypt": "^3.0.0",
-    "@types/express": "^4.17.11",
+    "@types/express": "^4.17.7",
     "@types/faker": "^5.1.5",
     "@types/jest": "^26.0.20",
     "@types/jsonwebtoken": "^8.5.0",
