@@ -11,6 +11,8 @@
         "@typescript-eslint/comma-spacing": "off",
         "@typescript-eslint/method-signature-style": "off",
         "@typescript-eslint/restrict-template-expressions": "off",
-        "@typescript-eslint/no-misused-promises": "off"
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "import/export": "off"
     }
 }
