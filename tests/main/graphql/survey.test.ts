@@ -99,7 +99,6 @@ describe('Survey GraphQL', () => {
     })
 
     test('should return AccessDeniedError if no token is provided', async () => {
-      const now = new Date()
       await surveyCollection.insertOne({
         question: 'Question',
         answers: [{
@@ -108,7 +107,7 @@ describe('Survey GraphQL', () => {
         }, {
           answer: 'Answer 2'
         }],
-        date: now
+        date: new Date()
       })
       const { query } = createTestClient({ apolloServer })
       const res: any = await query(surveysQuery)
