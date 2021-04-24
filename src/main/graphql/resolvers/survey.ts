@@ -3,6 +3,6 @@ import { makeLoadSurveysController } from '@/main/factories'
 
 export default {
   Query: {
-    login: async () => adaptResolver(makeLoadSurveysController())
+    surveys: async () => adaptResolver(makeLoadSurveysController())
   }
 }
