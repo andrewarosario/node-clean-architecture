@@ -6,5 +6,6 @@ import schemaDirectives from '@/main/graphql/directives'
 export const makeApolloServer = (): ApolloServer => new ApolloServer({
   resolvers,
   typeDefs,
-  schemaDirectives
+  schemaDirectives,
+  context: ({ req }) => ({ req })
 })
