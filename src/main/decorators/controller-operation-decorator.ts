@@ -1,3 +1,4 @@
+import { serverError } from '@/presentation/helpers'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class ControllerOperationDecorator implements Controller {
@@ -6,6 +7,10 @@ export class ControllerOperationDecorator implements Controller {
   ) {}
 
   async handle (request: any): Promise<HttpResponse> {
-    return this.controller.handle(request)
+    try {
+      return this.controller.handle(request)
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }
