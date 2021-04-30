@@ -1,7 +1,8 @@
 import { LogControllerDecorator } from '@/main/decorators'
 import { Controller, HttpResponse } from '@/presentation/protocols'
-import { serverError, ok } from '@/presentation/helpers'
+import { ok } from '@/presentation/helpers'
 import { LogErrorRepositorySpy } from '@/tests/data/mocks'
+import { mockServerError } from '@/tests/presentation/mocks'
 
 import faker from 'faker'
 
@@ -13,12 +14,6 @@ class ControllerSpy implements Controller {
     this.request = request
     return this.httpResponse
   }
-}
-
-const mockServerError = (): HttpResponse => {
-  const fakeError = new Error()
-  fakeError.stack = 'any_stack'
-  return serverError(fakeError)
 }
 
 type SutTypes = {
