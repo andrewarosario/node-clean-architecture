@@ -1,20 +1,9 @@
 import { LogControllerDecorator } from '@/main/decorators'
-import { Controller, HttpResponse } from '@/presentation/protocols'
-import { ok } from '@/presentation/helpers'
 import { LogErrorRepositorySpy } from '@/tests/data/mocks'
 import { mockServerError } from '@/tests/presentation/mocks'
+import { ControllerSpy } from '@/tests/presentation/mocks/controller'
 
 import faker from 'faker'
-
-class ControllerSpy implements Controller {
-  httpResponse = ok(faker.random.uuid())
-  request: any
-
-  async handle (request: any): Promise<HttpResponse> {
-    this.request = request
-    return this.httpResponse
-  }
-}
 
 type SutTypes = {
   sut: LogControllerDecorator
