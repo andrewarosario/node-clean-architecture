@@ -1,7 +1,6 @@
 import { AddSurveyController } from '@/presentation/controllers'
-import { badRequest, serverError, noContent } from '@/presentation/helpers'
+import { badRequest, noContent } from '@/presentation/helpers'
 import { ValidationSpy, AddSurveySpy } from '@/tests/presentation/mocks'
-import { throwError } from '@/tests/domain/mocks'
 
 import MockDate from 'mockdate'
 import faker from 'faker'
@@ -59,13 +58,6 @@ describe('AddSurvey Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(addSurveySpy.addSurveyParams).toEqual({ ...request, date: new Date() })
-  })
-
-  test('Should return 500 if AddSurvey throws', async () => {
-    const { sut, addSurveySpy } = makeSut()
-    jest.spyOn(addSurveySpy, 'add').mockImplementationOnce(throwError)
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 204 on success', async () => {

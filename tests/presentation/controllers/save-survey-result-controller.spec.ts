@@ -1,8 +1,7 @@
 import { SaveSurveyResultController } from '@/presentation/controllers'
 import { InvalidParamError } from '@/presentation/errors'
-import { forbidden, serverError, ok } from '@/presentation/helpers'
+import { forbidden, ok } from '@/presentation/helpers'
 import { SaveSurveyResultSpy, LoadAnswersBySurveySpy } from '@/tests/presentation/mocks'
-import { throwError } from '@/tests/domain/mocks'
 
 import MockDate from 'mockdate'
 import faker from 'faker'
@@ -53,13 +52,6 @@ describe('SaveSurveyResult Controller', () => {
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
   })
 
-  test('Should return 500 if LoadAnswersBySurvey throws', async () => {
-    const { sut, loadAnswersBySurveySpy } = makeSut()
-    jest.spyOn(loadAnswersBySurveySpy, 'loadAnswers').mockImplementationOnce(throwError)
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(serverError(new Error()))
-  })
-
   test('Should return 403 if an invalid answer is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
@@ -76,14 +68,6 @@ describe('SaveSurveyResult Controller', () => {
       date: new Date(),
       answer: request.answer
     })
-  })
-
-  test('Should return 500 if SaveSurveyResult throws', async () => {
-    const { sut, saveSurveyResultSpy, loadAnswersBySurveySpy } = makeSut()
-    jest.spyOn(saveSurveyResultSpy, 'save').mockImplementationOnce(throwError)
-    const request = mockRequest(loadAnswersBySurveySpy.result[0])
-    const httpResponse = await sut.handle(request)
-    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 on success', async () => {
