@@ -22,6 +22,13 @@ const makeSut = (): SutTypes => {
 }
 
 describe('ValidationController Decorator', () => {
+  test('Should call Validation with correct value', async () => {
+    const { sut, validationSpy } = makeSut()
+    const request = faker.lorem.sentence()
+    await sut.handle(request)
+    expect(validationSpy.input).toEqual(request)
+  })
+
   test('Should call controller handle', async () => {
     const { sut, controllerSpy } = makeSut()
     const request = faker.lorem.sentence()
