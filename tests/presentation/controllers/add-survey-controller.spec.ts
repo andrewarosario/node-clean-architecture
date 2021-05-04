@@ -1,6 +1,6 @@
 import { AddSurveyController } from '@/presentation/controllers'
-import { badRequest, noContent } from '@/presentation/helpers'
-import { ValidationSpy, AddSurveySpy } from '@/tests/presentation/mocks'
+import { noContent } from '@/presentation/helpers'
+import { AddSurveySpy } from '@/tests/presentation/mocks'
 
 import MockDate from 'mockdate'
 import faker from 'faker'
@@ -15,17 +15,14 @@ const mockRequest = (): AddSurveyController.Request => ({
 
 type SutTypes = {
   sut: AddSurveyController
-  validationSpy: ValidationSpy
   addSurveySpy: AddSurveySpy
 }
 
 const makeSut = (): SutTypes => {
-  const validationSpy = new ValidationSpy()
   const addSurveySpy = new AddSurveySpy()
-  const sut = new AddSurveyController(validationSpy, addSurveySpy)
+  const sut = new AddSurveyController(addSurveySpy)
   return {
     sut,
-    validationSpy,
     addSurveySpy
   }
 }
@@ -37,20 +34,6 @@ describe('AddSurvey Controller', () => {
 
   afterAll(() => {
     MockDate.reset()
-  })
-
-  test('Should call Validation with correct values', async () => {
-    const { sut, validationSpy } = makeSut()
-    const request = mockRequest()
-    await sut.handle(request)
-    expect(validationSpy.input).toEqual(request)
-  })
-
-  test('Should return 400 if Validation fails', async () => {
-    const { sut, validationSpy } = makeSut()
-    validationSpy.error = new Error()
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(badRequest(validationSpy.error))
   })
 
   test('Should call AddSurvey with correct values', async () => {
