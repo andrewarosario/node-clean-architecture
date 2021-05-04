@@ -7,6 +7,7 @@ export class ValidationControllerDecorator implements Controller {
   ) {}
 
   async handle (request: any): Promise<HttpResponse> {
+    this.validation.validate(request)
     return this.controller.handle(request)
   }
 }
