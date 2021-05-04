@@ -1,7 +1,7 @@
 import { SignUpController } from '@/presentation/controllers'
-import { MissingParamError, EmailInUseError } from '@/presentation/errors'
-import { ok, badRequest, forbidden } from '@/presentation/helpers'
-import { AuthenticationSpy, ValidationSpy, AddAccountSpy } from '@/tests/presentation/mocks'
+import { EmailInUseError } from '@/presentation/errors'
+import { ok, forbidden } from '@/presentation/helpers'
+import { AuthenticationSpy, AddAccountSpy } from '@/tests/presentation/mocks'
 
 import faker from 'faker'
 
@@ -18,19 +18,16 @@ const mockRequest = (): SignUpController.Request => {
 type SutTypes = {
   sut: SignUpController
   addAccountSpy: AddAccountSpy
-  validationSpy: ValidationSpy
   authenticationSpy: AuthenticationSpy
 }
 
 const makeSut = (): SutTypes => {
   const authenticationSpy = new AuthenticationSpy()
   const addAccountSpy = new AddAccountSpy()
-  const validationSpy = new ValidationSpy()
-  const sut = new SignUpController(addAccountSpy, validationSpy, authenticationSpy)
+  const sut = new SignUpController(addAccountSpy, authenticationSpy)
   return {
     sut,
     addAccountSpy,
-    validationSpy,
     authenticationSpy
   }
 }
@@ -58,20 +55,6 @@ describe('SignUp Controller', () => {
     const { sut, authenticationSpy } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(ok(authenticationSpy.authenticationModel))
-  })
-
-  test('Should call Validation with correct value', async () => {
-    const { sut, validationSpy } = makeSut()
-    const request = mockRequest()
-    await sut.handle(request)
-    expect(validationSpy.input).toEqual(request)
-  })
-
-  test('Should return 400 if Validation returns an error', async () => {
-    const { sut, validationSpy } = makeSut()
-    validationSpy.error = new MissingParamError(faker.random.word())
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(badRequest(validationSpy.error))
   })
 
   test('Should call Authentication with correct values', async () => {
