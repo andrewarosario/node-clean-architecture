@@ -1,3 +1,4 @@
+import { badRequest } from '@/presentation/helpers'
 import { Controller, HttpResponse, Validation } from '@/presentation/protocols'
 
 export class ValidationControllerDecorator implements Controller {
@@ -7,7 +8,10 @@ export class ValidationControllerDecorator implements Controller {
   ) {}
 
   async handle (request: any): Promise<HttpResponse> {
-    this.validation.validate(request)
+    const error = this.validation.validate(request)
+    if (error) {
+      return badRequest(error)
+    }
     return this.controller.handle(request)
   }
 }
